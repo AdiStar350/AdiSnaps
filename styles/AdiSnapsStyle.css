@@ -1,0 +1,40 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.content-body {
+    display: flex;
+    overflow: auto;
+    min-height: 100vh;
+}
+
+.header, .footer {
+    background-color: aquamarine;
+    flex: 0 0 100px;
+}
+
+.main {
+    background-color: blueviolet;
+    flex: 4 4 auto;
+    color: white;
+}
+
+.nav {
+    background-color: chocolate;
+    transition: flex 1s ease-out;
+}
+
+.menu-button {
+    background-color: rgb(0, 136, 255);
+    border: 2px solid red;
+    border-radius: 25%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
