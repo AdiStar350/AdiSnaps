@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="author" content="Adi Strasser" />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="keywords" content="Photography, Adi, Strasser, Camera, Pictures" />
+        <title>Adi Snaps</title>
+        <link rel="stylesheet" href="/css/AdiSnapsStyle.css" />
+        <script src="/js/AdiSnapsScript.js"></script>
+    </head>
+    <body onload="lock();">
+        <div id="waker" class="waker">
+            <h1>Please Login</h1>
+            <form name="form">
+                <label for="username" class="text">Username:</label>
+                <input type="text" id="username" name="username" class="input" />
+                <br />
+                <label for="password" class="text">Password:</label>
+                <input type="text" id="password" name="password" class="input" />
+                <br />
+                <br />
+                <button class="top" onclick="login(form); form.reset(); return false;">LOGIN</button>
+            </form>
+            
+        </div>
+        <div id="container" class="container">
+            <header class="header">
+                <div style="display: flex;">
+                    <button class="menu-button" onclick="toggleNav = navBar(toggleNav);">
+                        <span id="pan1" class="pan1"></span>
+                        <span id="pan2" class="pan2"></span>
+                        <span id="pan3" class="pan3"></span>
+                    </button>
+                    <button class="cart-button" id="cartButton">
+                        <img src="/pic/cart_transparent.png" />
+                    </button>
+                </div>
+                <h1>Adi Snaps</h1>
+            </header>
+            <div class="content-body">
+                <nav id="nav" class="nav">
+                    <a href="/html/Welcome.html" target="frame">
+                        <h3>HOME</h3>
+                    </a>
+                    <a href="/html/About.html" target="frame">
+                        <h3>ABOUT</h3>
+                    </a>
+                    <a href="/html/Photos.html" target="frame">
+                        <h3>PHOTOS</h3>
+                    </a>
+                    <a href="/html/Gear.html" target="frame">
+                        <h3>GEAR</h3>
+                    </a>
+                    <a href="/html/Learn.html" target="frame">
+                        <h3>LEARN</h3>
+                    </a>
+                    <a href="/html/Contact.html" target="frame">
+                        <h3>CONTACT</h3>
+                    </a>
+                    <a href="/html/Shop.html" target="frame">
+                        <h3>SHOP</h3>
+                    </a>
+                </nav>
+                <main class="main">
+                    <iframe class="frame" id="frame" name="frame" src="/html/Welcome.html"></iframe>
+                </main>
+                <aside class="cart" id="cart">
+
+                </aside>
+            </div>
+            <footer class="footer">
+                <p>Find me on Instagram</p>
+                <a href="https://www.instagram.com/_adisnaps_?igsh=YW5seGR0MGw3OWZn&utm_source=qr" target="_blank">
+                    <img class="logo" src="/pic/inst.png" />
+                </a>
+            </footer>
+        </div>
+    </body>
+</html>

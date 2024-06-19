@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="author" content="Adi Strasser" />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/css/AdiSnapsStyle.css" />
+        <script src="/js/UserSubmitScript.js"></script>
+    </head>
+    <body>
+        <div class="submit">
+            <form action="/html/Contact.html" name="form" onsubmit="return isOk(form);">
+                <label for="first-name">First Name:</label>
+                <input type="text" name="firstName" id="first-name" class="input" />
+                <br />
+                <br />
+                <label for="last-name">Last Name:</label>
+                <input type="text" name="lastName" id="last-name" class="input" />
+                <br />
+                <br />
+                <label for="email">Email:</label>
+                <input type="text" name="email" id="email" class="input" />
+                <br />
+                <br />
+                <label for="reason">Why are you contacting me?</label>
+                <br />
+                <br />
+                <div id="reason">
+                    <input type="radio" name="reason" id="hire" value="hire" />
+                    <label for="hire">I want a photo-shoot</label>
+                    <br />
+                    <br />
+                    <input type="radio" name="reason" id="model" value="model" />
+                    <label for="model">I want to work with you as a Photographer</label>
+                    <br />
+                    <br />
+                    <input type="radio" name="reason" id="photo" value="photo" />
+                    <label for="photo">I want to work with you as a Model</label>
+                    <br />
+                    <br />
+                    <input type="radio" name="reason" id="other" value="other" />
+                    <label for="other">Something else</label>
+                </div>
+                <br />
+                <br />
+                <label for="area">Where are you from?</label>
+                <input name="area" list="area" class="input" />
+                <datalist id="area">
+                    <option selected="selected" value="">Choose</option>
+                    <option value="Akko">Akko</option>
+                    <option value="Afula">Afula</option>
+                    <option value="Arad">Arad</option>
+                    <option value="Ashdod">Ashdod</option>
+                    <option value="Ashkelon">Ashkelon</option>
+                    <option value="Bat Yam">Bat Yam</option>
+                    <option value="Beersheba">Beersheba</option>
+                    <option value="Beit She'an">Beit She'an</option>
+                    <option value="Beit Shemesh">Beit Shemesh</option>
+                    <option value="Bnei Brak">Bnei Brak</option>
+                    <option value="Dimona">Dimona</option>
+                    <option value="Eilat">Eilat</option>
+                    <option value="El'ad">El'ad</option>
+                    <option value="Giv'at Shmuel">Giv'at Shmuel</option>
+                    <option value="Givatayim">Givatayim</option>
+                    <option value="Hadera">Hadera</option>
+                    <option value="Haifa">Haifa</option>
+                    <option value="Herzliya">Herzliya</option>
+                    <option value="Hod HaSharon">Hod HaSharon</option>
+                    <option value="Holon">Holon</option>
+                    <option value="Jerusalem">Jerusalem</option>
+                    <option value="Karmiel">Karmiel</option>
+                    <option value="Kfar Saba">Kfar Saba</option>
+                    <option value="Kfar Yona">Kfar Yona</option>
+                    <option value="Kiryat Ata">Kiryat Ata</option>
+                    <option value="Kiryat Bialik">Kiryat Bialik</option>
+                    <option value="Kiryat Gat">Kiryat Gat</option>
+                    <option value="Kiryat Malakhi">Kiryat Malakhi</option>
+                    <option value="Kiryat Motzkin">Kiryat Motzkin</option>
+                    <option value="Kiryat Ono">Kiryat Ono</option>
+                    <option value="Kiryat Shmona">Kiryat Shmona</option>
+                    <option value="Kiryat Yam">Kiryat Yam</option>
+                    <option value="Lod">Lod</option>
+                    <option value="Ma'alot Tarshiha">Ma'alot Tarshiha</option>
+                    <option value="Migdal HaEmek">Migdal HaEmek</option>
+                    <option value="Modi'in Maccabim Re'ut">Modi'in Maccabim Re'ut</option>
+                    <option value="Nahariya">Nahariya</option>
+                    <option value="Nazareth">Nazareth</option>
+                    <option value="Nesher">Nesher</option>
+                    <option value="Ness Ziona">Ness Ziona</option>
+                    <option value="Netanya">Netanya</option>
+                    <option value="Netivot">Netivot</option>
+                    <option value="Nof HaGalil">Nof HaGalil</option>
+                    <option value="Ofakim">Ofakim</option>
+                    <option value="Or Akiva">Or Akiva</option>
+                    <option value="Or Yehuda">Or Yehuda</option>
+                    <option value="Petah Tikva">Petah Tikva</option>
+                    <option value="Ra'anana">Ra'anana</option>
+                    <option value="Rahat">Rahat</option>
+                    <option value="Ramat Gan">Ramat Gan</option>
+                    <option value="Ramat HaSharon">Ramat HaSharon</option>
+                    <option value="Ramla">Ramla</option>
+                    <option value="Rehovot">Rehovot</option>
+                    <option value="Rishon LeZion">Rishon LeZion</option>
+                    <option value="Rosh HaAyin">Rosh HaAyin</option>
+                    <option value="Safed">Safed</option>
+                    <option value="Sakhnin">Sakhnin</option>
+                    <option value="Sderot">Sderot</option>
+                    <option value="Shefa-'Amr">Shefa-'Amr</option>
+                    <option value="Tamra">Tamra</option>
+                    <option value="Tayibe">Tayibe</option>
+                    <option value="Tel Aviv-Yafo">Tel Aviv-Yafo</option>
+                    <option value="Tiberias">Tiberias</option>
+                    <option value="Tira">Tira</option>
+                    <option value="Tirat Carmel">Tirat Carmel</option>
+                    <option value="Umm al-Fahm">Umm al-Fahm</option>
+                    <option value="Yavne">Yavne</option>
+                    <option value="Yokneam Illit">Yokneam Illit</option>
+                </datalist>
+                <br />
+                <br />
+                <label for="free-text">Tell me more:</label>
+                <br />
+                <br />
+                <textarea cols="45" rows="15" id="free-text" class="input" name="freeText"></textarea>
+                <br />
+                <br />
+                <input type="reset" name="reset" value="Reset" class="top" />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="submit" name="submit" value="Submit" class="top" />
+            </form>
+        </div>
+    </body>
+</html>

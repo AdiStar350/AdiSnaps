@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="author" content="Adi Strasser" />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/css/AdiSnapsStyle.css" />
+        <script src="/js/AdiSnapsScript.js"></script>
+    </head>
+    <body>
+        <div class="shop">
+            <h1>Shop Here</h1>
+            <form name="shop">
+                <select name="filter" onchange="filterShop(shop);">
+                    <option selected="selected">Filter Shop</option>
+                    <option value="cam-sony">Camera - Sony</option>
+                    <option value="lens">Lens</option>
+                    <option value="sony">Sony</option>
+                    <option value="canon">Canon</option>
+                    <option value="fuji">Fujifilm</option>
+                    <option value="other">Other</option>
+                </select>
+                <div id="placeholder" class="gallery">
+                    
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,276 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.content-body {
+    display: flex;
+    overflow: auto;
+    min-height: calc(100vh - 200px);
+}
+
+.header, .footer {
+    flex: 0 0 100px;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    flex: 3 3 auto;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    background-color: #FFEDDB;
+    transition: flex 2s ease-out;
+    font-family: Futura;
+    overflow: hidden;
+    flex: 0 0 0px;
+    align-items: center;
+    max-width: 300px;
+}
+
+.menu-button {
+    display: flex;
+    flex-direction: column;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    margin: 20px 0 0 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #FFEDDB;
+    padding-right: 20px;
+    color: #BF9270;
+    font-family: Futura;
+}
+
+.menu-button span {
+    background-color: #BF9270;
+    border-radius: 10px;
+    height: 7px;
+    margin: 7px 0;
+    transition: .4s  cubic-bezier(0.68, -0.6, 0.32, 1.6);
+    width: 100%;
+}
+
+.header h1 {
+    margin-top: 20px;
+}
+
+.footer {
+    display: flex;
+    background-color: #BF9270;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.about-me-1, .about-me-2, .photos, .gear, .learn, .contact, .submit, .shop {
+    align-items: center;
+    justify-content: space-evenly;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #EDCDBB;
+    text-align: center;
+}
+
+.profile {
+    width: 40%;
+    border-radius: 500px;
+    box-shadow: 0 0 15px 10px #BF9270;
+}
+
+.about-me-1 .text {
+    width: 40%;
+    text-align: justify;
+    font-size: 30px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.footer p {
+    font-size: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
+}
+
+.logo {
+    width: 40px;
+}
+
+.frame {
+    min-height: calc(100vh - 200px);
+    width: 100%;
+    border: none;
+}
+
+a:link, a:visited {
+    color: black;
+    text-decoration: none;
+}
+
+.learn h1, .gear h1, .photos span, .about-me-2 h1, .contact h1, .shop h1 {
+    font-family: Snell Roundhand;
+    font-size: 65px;
+}
+
+.learn .text, .gear .text, .about-me-2 .text, .waker .text{
+    width: 60%;
+    text-align: justify;
+    font-size: 30px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 30px;
+    justify-items: center;
+    margin: 30px 0 60px 0;
+    width: 80%;
+}
+
+.gallery img {
+    width: 90%;
+    border: 10px solid #BF9270;
+}
+
+.top {
+    font-size: 23px;
+    font-family: Futura;
+    padding: 10px;
+    border: black solid 2px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+.top:hover {
+    border: #BF9270 solid 2px;
+    background-color: #BF9270;
+    color: white;
+}
+
+.itube iframe {
+    aspect-ratio: 16 / 9;
+    width: 80vw;
+}
+
+.rnd {
+    border-radius: 30px;
+}
+
+.gear :is(table, td, th) {
+    border: 2px solid black;
+    border-collapse: collapse;
+    padding: 20px;
+    text-align: center;
+    font-size: 23px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.gear table {
+    width: 80vw;
+    margin-bottom: 30px;
+}
+
+.tiny {
+    height: 60px;
+}
+
+.submit {
+    padding-top: 30px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 23px;
+    text-align: center;
+}
+
+.input {
+    font-size: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: rgba(0, 0, 0, 0);
+    border: 3px solid #BF9270;
+    border-radius: 20px;
+}
+
+.waker {
+    display: flex;
+    flex-direction: column;
+    font-size: 60px;
+    font-family: Snell Roundhand;
+    color: white;
+    position: absolute;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    visibility: hidden;
+}
+
+.waker button {
+    width: 150px;
+}
+
+.waker .input {
+    color: white;
+}
+
+.display {
+    border: 10px solid #BF9270;
+}
+
+.shop select {
+    padding: 10px;
+    border: 3px solid #BF9270;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 20px;
+    font-family: Futura;
+    font-size: 23px;
+}
+
+.quantity {
+    display: flex;
+    justify-content: space-between;
+    width: 30%;
+}
+
+.cart {
+    background-color: #BF9270;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    transition: flex 2s ease-out;
+    font-family: Futura;
+    overflow: auto;
+    flex: 0 0 0px;
+    justify-content: center;
+    max-width: 300px;
+}
+ 
+.shop {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 23px;
+}
+
+.cart-button img , .cart-button {
+    width: 60px;
+    aspect-ratio: 1/1;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    cursor: pointer;
+}
