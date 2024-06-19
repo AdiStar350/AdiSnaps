@@ -140,8 +140,7 @@ class Product {
 
     init() {
         document.getElementById("addToCart").onclick = () => {
-            cart.push(this);
-            document.getElementById("frame").contentWindow.history.back();
+            
         };
 
         document.getElementById("incrementButton").onclick = () => {
@@ -181,21 +180,28 @@ function filterShop(form) {
             document.getElementById("placeholder").innerHTML = `
                 <img src="/pic/Shop/Sony/Cam/zv-1-II.jpeg" />
                 <img src="/pic/Shop/Sony/Cam/a6400.jpeg" />
-                <button class="top" onclick="displayProduct(1);">SHOW PRODUCT</button>
-                <button class="top" onclick="displayProduct(2);">SHOW PRODUCT</button>
+                <button class="top" id="show1">SHOW PRODUCT</button>
+                <button class="top" id="show2">SHOW PRODUCT</button>
                 <img src="/pic/Shop/Sony/Cam/a6600.jpeg" />
                 <img src="/pic/Shop/Sony/Cam/a6700.jpeg" />
-                <button class="top" onclick="displayProduct(3);">SHOW PRODUCT</button>
-                <button class="top" onclick="displayProduct(4);">SHOW PRODUCT</button>
+                <button class="top" id="show3";">SHOW PRODUCT</button>
+                <button class="top" id="show4";">SHOW PRODUCT</button>
                 <img src="/pic/Shop/Sony/Cam/a7-III.jpeg" />
                 <img src="/pic/Shop/Sony/Cam/a7-IV.jpeg" />
-                <button class="top" onclick="displayProduct(5);">SHOW PRODUCT</button>
-                <button class="top" onclick="displayProduct(6);">SHOW PRODUCT</button>
+                <button class="top" id="show5";">SHOW PRODUCT</button>
+                <button class="top" id="show6";">SHOW PRODUCT</button>
                 <img src="/pic/Shop/Sony/Cam/a7c-II.jpeg" />
                 <img src="/pic/Shop/Sony/Cam/a1.jpeg" />
-                <button class="top" onclick="displayProduct(7);">SHOW PRODUCT</button>
-                <button class="top" onclick="displayProduct(8);">SHOW PRODUCT</button>
+                <button class="top" id="show7";">SHOW PRODUCT</button>
+                <button class="top" id="show8";">SHOW PRODUCT</button>
             `;
+
+            for(let i = 1; i <= 8; i++) {
+                document.getElementById("show" + i).addEventListener("click", () => {
+                    displayProduct(i);
+                });
+            }
+
             break;
     }
 }
@@ -245,7 +251,7 @@ function lock() {
 
 
 function login(form) {
-    if (/^[a-z]{2,}\d{9}$/i.test(form.password.value)) {
+    if (/^[\d]{9}$/.test(form.password.value) && /^[a-z]{3,}$/i.test(form.username.value)) {
         document.getElementById("waker").style.visibility = "hidden";
         document.getElementById("container").style.filter = "none";
         setInterval('lock();', 300000);
@@ -258,9 +264,10 @@ function login(form) {
 function displayProduct(id) {
     for (var i = 0; i < warehouse.length; i++) {
         if (warehouse[i][0] == id) {
+            alert("Product found!");
             var product = new Product(warehouse[i][0], warehouse[i][1], warehouse[i][2], warehouse[i][3], warehouse[i][4], warehouse[i][5], warehouse[i][6]);
+            break;
         }
-        break;
     }
 
     document.write(product.toString());
