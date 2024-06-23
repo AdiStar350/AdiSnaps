@@ -256,10 +256,11 @@ a:link, a:visited {
     flex-direction: column;
     transition: flex 2s ease-out;
     font-family: Futura;
-    overflow: auto;
+    overflow: hidden;
     flex: 0 0 0px;
-    justify-content: center;
+    justify-content: baseline;
     max-width: 300px;
+    align-items: center;
 }
  
 .shop {

@@ -12,7 +12,11 @@ class Product {
     }
 
     set setID(val) {
-        this.id = val;
+        if(!isNaN(val)) {
+            this.id = val * 1;
+        } else {
+            prompt("Error: Invalid ID");
+        }
     }
 
     set setName(val) {
@@ -20,31 +24,59 @@ class Product {
     }
 
     set setPicture(val) {
-        this.picture = val;
+        if (/^pic\/Shop\/[a-zA-z]{1,}.jpeg$/.test(val)) {
+            this.picture = val;
+        } else {
+            prompt("Error: Invalid Picture Src");
+        }
     }
 
     set setBrand(val) {
-        this.brand = val;
+        if (/^[a-z]/i.test(val)) {
+            this.brand = val;
+        } else {
+            prompt("Error: Invalid Brand");
+        }
     }
 
     set setType(val) {
-        this.type = val;
+        if (/^[a-z]/i.test(val)) {
+            this.type = val;
+        } else {
+            prompt("Error: Invalid Type");
+        }
     }
 
     set setPrice(val) {
-        this.price = val;
+        if (!isNaN(val)) {
+            this.price = val * 1;
+        } else {
+            prompt("Error: Invalid Price");
+        }
     }
 
     set setQuantity(val) {
-        this.quantity = val;
+        if (!isNaN(val)) {
+            this.quantity = val * 1;
+        } else {
+            prompt("Error: Invalid Quantity");
+        } 
     }
 
     set setOther(val) {
-        this.other = val;
+        if (/^[a-z,]/i.test(val)) {
+            this.other = val;
+        } else {
+            prompt("Error: Invalid Other");
+        }
     }
-
+     
     set setTotal(val) {
-        this.total = val;
+        if (!isNaN(val)) {
+            this.total = val * 1;
+        } else {
+            prompt("Error: Invalid Total");
+        } 
     }
 
     get getID() {
@@ -88,78 +120,71 @@ class Product {
         return `
             <link rel="stylesheet" href="/css/AdiSnapsStyle.css" />
             <div class="shop">
-            <img id="image" src="" />
+            <img id="image" src="${this.picture}" />
             <br /><br />
-            <div id="cam-name"></div>
+            <div id="cam-name">
+                ${this.brand} ${this.productName}
+            </div>
             <br /><br />
-            <div id="cam-description"></div>
+            <div id="cam-description">
+                ${this.type} ${this.other}
+            </div>
             <br /><br />
-            <div id="cam-price"></div>
+            <div id="cam-price">
+                ${this.price}₪
+            </div>
             <br /><br />
             <div class="quantity">
                 <button id="incrementButton" class="top"> + </button>
-                <div id="quan"></div>
+                <div id="quan">${this.quantity}</div>
                 <button id="decrementButton" class="top"> - </button>
             </div>
             Total:
-            <div id="total"></div>
+            <div id="total">
+                ${this.total}₪
+            </div>
             <br /><br />
             <button id="addToCart" class="top">ADD TO CART</button>
         </div>
         `;
     }
 
-
-    updateDisplay(t, q) {
-        document.getElementById("image").src = this.picture;
-        document.getElementById("cam-name").innerHTML = this.brand + ' ' + this.productName;
-        document.getElementById("cam-description").innerHTML = this.type + ' ' + this.other;
-        document.getElementById("cam-price").innerHTML = this.price + '₪';
-        document.getElementById("quan").innerHTML = q;
-        document.getElementById("total").innerHTML = t + '₪';
-
-        if (this.quantity == 0) {
-            document.getElementById("addToCart").style.visibility = "hidden";
-        } else {
-            document.getElementById("addToCart").style.visibility = "visible";
-        }
-    }
-
-
     increment(val) {
         val < 10 ? val++ : alert("Cant go any higher!");
         return val;
     }
-
 
     decrement(val) {
         val > 0 ? val-- : alert("Cant go any lower!");
         return val;
     }
 
+    updateDisplay() {
+        document.getElementById("quan").innerText = this.quantity;
+        document.getElementById("total").innerText = this.total + "₪";
+        document.getElementById("addToCart").style.visibility = this.quantity == 0 ? "hidden" : "visible";
+    }
 
     init() {
         document.getElementById("addToCart").onclick = () => {
-            
+            document.getElementById("cartFill").innerHTML += `<p>${this.quantity} X ${this.productName} ---------- ${this.total}</p><hr />`;
         };
 
         document.getElementById("incrementButton").onclick = () => {
             this.setQuantity = this.increment(this.quantity);
             this.setTotal = this.quantity * this.price;
-            this.updateDisplay(this.total ,this.quantity);
+            this.updateDisplay();
         };
         
         document.getElementById("decrementButton").onclick = () => {
             this.setQuantity = this.decrement(this.quantity);
             this.setTotal = this.quantity * this.price;
-            this.updateDisplay(this.total ,this.quantity);
+            this.updateDisplay();
         };
-        
-        this.updateDisplay(this.total ,this.quantity);
     }
 }
 
-var warehouse = [
+const warehouse = [
     [1, "ZV-1 mark II", "/pic/Shop/Sony/Cam/zv-1-II.jpeg", "Sony", "Camera", 3969, "18-50mm Fixed Lens, 3840 x 2160 Video Resolution, 20.1MP, Mirrorless"],
     [2, "A6400", "/pic/Shop/Sony/Cam/a6400.jpeg", "Sony", "Camera", 3149, "Mirrorless, For Sony E Mount"],
     [3, "A6600", "/pic/Shop/Sony/Cam/a6600.jpeg", "Sony", "Camera", 5679, "Mirrorless, For Sony E Mount"],
@@ -169,7 +194,6 @@ var warehouse = [
     [7, "A7c mark II", "/pic/Shop/Sony/Cam/a7c-II.jpeg", "Sony", "Camera", 9079, "Mirrorless For Cinema, 3840 x 2160 Video Resolution, 33MP"],
     [8, "A1", "/pic/Shop/Sony/Cam/a1.jpeg", "Sony", "Camera", 24549, "UHD 4K Video Resolution, Full Frame, 50.1MP, Mirrorless"],
 ];
-var cart = new Array();
 var toggleNav = true;
 var toggleCart = true;
 
@@ -196,7 +220,7 @@ function filterShop(form) {
                 <button class="top" id="show8";">SHOW PRODUCT</button>
             `;
 
-            for(let i = 1; i <= 8; i++) {
+            for (let i = 1; i <= 8; i++) {
                 document.getElementById("show" + i).addEventListener("click", () => {
                     displayProduct(i);
                 });
@@ -264,7 +288,6 @@ function login(form) {
 function displayProduct(id) {
     for (var i = 0; i < warehouse.length; i++) {
         if (warehouse[i][0] == id) {
-            alert("Product found!");
             var product = new Product(warehouse[i][0], warehouse[i][1], warehouse[i][2], warehouse[i][3], warehouse[i][4], warehouse[i][5], warehouse[i][6]);
             break;
         }
