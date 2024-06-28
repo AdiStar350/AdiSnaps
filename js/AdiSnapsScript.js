@@ -119,33 +119,44 @@ class Product {
     toString() {
         return `
             <link rel="stylesheet" href="/css/AdiSnapsStyle.css" />
-            <div class="shop">
-            <img id="image" src="${this.picture}" />
-            <br /><br />
-            <div id="cam-name">
-                ${this.brand} ${this.productName}
+            <div class="temp">
+                <div class="shop">
+                    <button class="cart-button" id="cartButton" onclick="toggleCart = cartBar(toggleCart)">
+                        <img src="/pic/cart_transparent.png" />
+                    </button>
+                    <img id="image" src="${this.picture}" />
+                    <br /><br />
+                    <div id="cam-name">
+                        ${this.brand} ${this.productName}
+                    </div>
+                    <br /><br />
+                    <div id="cam-description">
+                        ${this.type} ${this.other}
+                    </div>
+                    <br /><br />
+                    <div id="cam-price">
+                        ${this.price}₪
+                    </div>
+                    <br /><br />
+                    <div class="quantity">
+                        <button id="incrementButton" class="top"> + </button>
+                        <div id="quan">${this.quantity}</div>
+                        <button id="decrementButton" class="top"> - </button>
+                    </div>
+                    Total:
+                    <div id="total">
+                        ${this.total}₪
+                    </div>
+                    <br /><br />
+                    <button id="addToCart" class="top">ADD TO CART</button>
+                </div>
+                <aside class="cart" id="cart">
+                    <h2>Cart</h2>
+                    <div id="cartFill">
+                            
+                    </div>
+                </aside>
             </div>
-            <br /><br />
-            <div id="cam-description">
-                ${this.type} ${this.other}
-            </div>
-            <br /><br />
-            <div id="cam-price">
-                ${this.price}₪
-            </div>
-            <br /><br />
-            <div class="quantity">
-                <button id="incrementButton" class="top"> + </button>
-                <div id="quan">${this.quantity}</div>
-                <button id="decrementButton" class="top"> - </button>
-            </div>
-            Total:
-            <div id="total">
-                ${this.total}₪
-            </div>
-            <br /><br />
-            <button id="addToCart" class="top">ADD TO CART</button>
-        </div>
         `;
     }
 
@@ -167,7 +178,19 @@ class Product {
 
     init() {
         document.getElementById("addToCart").onclick = () => {
-            document.getElementById("cartFill").innerHTML += `<p>${this.quantity} X ${this.productName} ---------- ${this.total}</p><hr />`;
+            var item = [this.quantity, this.brand, this.productName, this.type, this.total, this.id, this.price];
+
+            for (var i = 0; i < cart.length; i++) {
+                if (cart[i][5]  == this.id) {
+                    item[0] = cart[i][0] + this.quantity;
+                    item[4] = item[6] * item[0];
+                    cart.splice(i);
+                }
+            }
+
+            cart.push(item);
+            sessionStorage.setItem('cart', JSON.stringify(cart));
+            displayCart();
         };
 
         document.getElementById("incrementButton").onclick = () => {
@@ -181,6 +204,9 @@ class Product {
             this.setTotal = this.quantity * this.price;
             this.updateDisplay();
         };
+
+        document.getElementById("addToCart").style.visibility = this.quantity == 0 ? "hidden" : "visible";
+        displayCart();
     }
 }
 
@@ -196,6 +222,7 @@ const warehouse = [
 ];
 var toggleNav = true;
 var toggleCart = true;
+var cart = [];
 
 
 function filterShop(form) {
@@ -240,7 +267,6 @@ function navBar(toggleNav) {
         document.getElementById("pan2").style.visibility = "hidden";
         document.getElementById("pan3").style.transformOrigin = "center";
         document.getElementById("pan3").style.transform = "translate(0px, -19px) rotatez(-45deg)";
-        document.getElementById("cartButton").style.visibility = "visible";
         return false;
     } else {
         document.getElementById("nav").style.flex = "0 0 0px";
@@ -250,7 +276,6 @@ function navBar(toggleNav) {
         document.getElementById("pan2").style.transform = "rotatez(-180deg)";
         document.getElementById("pan3").style.transformOrigin = "center";
         document.getElementById("pan3").style.transform = "translate(0px, 0px) rotatez(0deg)";
-        document.getElementById("cartButton").style.visibility = "hidden";
         return true;
     }
 }
@@ -258,7 +283,7 @@ function navBar(toggleNav) {
 
 function cartBar(toggleCart) {
     if (toggleCart) {
-        document.getElementById("cart").style.flex = "1 1 150px";
+        document.getElementById("cart").style.flex = "1 1 1000px";
         return false;
     } else {
         document.getElementById("cart").style.flex = "0 0 0px";
@@ -270,7 +295,6 @@ function cartBar(toggleCart) {
 function lock() {
     document.getElementById("container").style.filter = "blur(20px)";
     document.getElementById("waker").style.visibility = "visible";
-    document.getElementById("cartButton").style.visibility = "hidden";
 }
 
 
@@ -297,3 +321,15 @@ function displayProduct(id) {
     product.init();
 }
 
+function displayCart() {
+    const arr = sessionStorage.getItem('cart');
+    if (arr) {
+        cart = JSON.parse(arr);
+
+        document.getElementById("cartFill").innerHTML = '';
+
+        for (var i = 0; i < cart.length; i++) {
+            document.getElementById("cartFill").innerHTML += `${cart[i][0]} X ${cart[i][1]} ${cart[i][2]} ${cart[i][3]} ---- ${cart[i][4]}<br />`;
+        }   
+    }
+}

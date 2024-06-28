@@ -261,11 +261,14 @@ a:link, a:visited {
     justify-content: baseline;
     max-width: 300px;
     align-items: center;
+    top: -40px;
 }
  
 .shop {
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 23px;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .cart-button img , .cart-button {
@@ -274,4 +277,11 @@ a:link, a:visited {
     background-color: rgba(0, 0, 0, 0);
     border: none;
     cursor: pointer;
+    position: absolute;
+    top: 15px;
+    left: 15px; 
+}
+
+.temp {
+    display: flex;
 }
