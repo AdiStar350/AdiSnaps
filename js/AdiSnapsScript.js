@@ -152,8 +152,12 @@ class Product {
                 </div>
                 <aside class="cart" id="cart">
                     <h2>Cart</h2>
-                    <div id="cartFill">
+                    <div class="fill" id="cartFill">
                             
+                    </div>
+                    <div id="cartBottom" class="bottom-cart">
+                        <button id="clearCart" onclick="cleanCart()" class="top">CLEAR</button>
+                        <a href="/html/Bought.html" class="top">CHECKOUT</a>
                     </div>
                 </aside>
             </div>
@@ -206,19 +210,33 @@ class Product {
         };
 
         document.getElementById("addToCart").style.visibility = this.quantity == 0 ? "hidden" : "visible";
+        document.getElementById("cartBottom").style.visibility = "hidden";
         displayCart();
     }
 }
 
 const warehouse = [
-    [1, "ZV-1 mark II", "/pic/Shop/Sony/Cam/zv-1-II.jpeg", "Sony", "Camera", 3969, "18-50mm Fixed Lens, 3840 x 2160 Video Resolution, 20.1MP, Mirrorless"],
-    [2, "A6400", "/pic/Shop/Sony/Cam/a6400.jpeg", "Sony", "Camera", 3149, "Mirrorless, For Sony E Mount"],
-    [3, "A6600", "/pic/Shop/Sony/Cam/a6600.jpeg", "Sony", "Camera", 5679, "Mirrorless, For Sony E Mount"],
-    [4, "A6700", "/pic/Shop/Sony/Cam/a6700.jpeg", "Sony", "Camera", 6220, "Mirrorless, For Sony E Mount"],
-    [5, "A7 mark III", "/pic/Shop/Sony/Cam/a7-III.jpeg", "Sony", "Camera", 5899, "Full Frame, Mirrorless"],
-    [6, "A7 mark IV", "/pic/Shop/Sony/Cam/a7-IV.jpeg", "Sony", "Camera", 8899, "Full Frame, Mirrorless, 33MP"],
-    [7, "A7c mark II", "/pic/Shop/Sony/Cam/a7c-II.jpeg", "Sony", "Camera", 9079, "Mirrorless For Cinema, 3840 x 2160 Video Resolution, 33MP"],
-    [8, "A1", "/pic/Shop/Sony/Cam/a1.jpeg", "Sony", "Camera", 24549, "UHD 4K Video Resolution, Full Frame, 50.1MP, Mirrorless"],
+    [1, "ZV-1 mark II", "/pic/Shop/Sony/Cam/zv-1-II.png", "Sony", "Camera", 3969, "18-50mm Fixed Lens, 3840 x 2160 Video Resolution, 20.1MP, Mirrorless"],
+    [2, "A6400", "/pic/Shop/Sony/Cam/a6400.png", "Sony", "Camera", 3149, "Mirrorless, For Sony E Mount"],
+    [3, "A6600", "/pic/Shop/Sony/Cam/a6600.png", "Sony", "Camera", 5679, "Mirrorless, For Sony E Mount"],
+    [4, "A6700", "/pic/Shop/Sony/Cam/a6700.png", "Sony", "Camera", 6220, "Mirrorless, For Sony E Mount"],
+    [5, "A7 mark III", "/pic/Shop/Sony/Cam/a7-III.png", "Sony", "Camera", 5899, "Full Frame, Mirrorless"],
+    [6, "A7 mark IV", "/pic/Shop/Sony/Cam/a7-IV.png", "Sony", "Camera", 8899, "Full Frame, Mirrorless, 33MP"],
+    [7, "A7c mark II", "/pic/Shop/Sony/Cam/a7c-II.png", "Sony", "Camera", 9079, "Mirrorless For Cinema, 3840 x 2160 Video Resolution, 33MP"],
+    [8, "A1", "/pic/Shop/Sony/Cam/a1.png", "Sony", "Camera", 24549, "UHD 4K Video Resolution, Full Frame, 50.1MP, Mirrorless"],
+    [9, "EOS R7", "/pic/Shop/Canon/Cam/eos-r7.png", "Canon", "Camera", 5479, "32.5MP, Mirrorless"],
+    [10, "EOS R", "/pic/Shop/Canon/Cam/eos-r.png", "Canon", "Camera", 6849, "30.3MP, Mirrorless, Full Frame"],
+    [11, "EOS R6 mark II", "/pic/Shop/Canon/Cam/eos-r6-II.png", "Canon", "Camera", 9549, "24.2MP, Mirrorless, 40 FPS"],
+    [12, "EOS R5", "/pic/Shop/Canon/Cam/eos-r5.png", "Canon", "Camera", 11999, "45MP, Mirrorless"],
+    [13, "EOS R5C", "/pic/Shop/Canon/Cam/eos-r5c.png", "Canon", "Camera", 18299, "45MP, Mirrorless, For Cinema"],
+    [14, "EOS R3", "/pic/Shop/Canon/Cam/eos-r3.png", "Canon", "Camera", 21549, "24.1MP, Mirrorless, Has Battery Grip"],
+    [15, "X100VI", "/pic/Shop/Fuji/Cam/x100-VI.png", "Fujifilm", "Camera", 6999, "40.2MP, Mirrorless, Can Emulate Film"],
+    [16, "XT30 mark II", "/pic/Shop/Fuji/Cam/xt30-II.png", "Fujifilm", "Camera", 3449, "26.1MP, Mirrorless, Can Emulate Film"],
+    [17, "X Pro 3", "/pic/Shop/Fuji/Cam/x-pro-3.png", "Fujifilm", "Camera", 6859, "26.1MP, Mirrorless, Can Emulate Film"],
+    [18, "XT5", "/pic/Shop/Fuji/Cam/xt5.png", "Fujifilm", "Camera", 6979, "40.2MP, Mirrorless"],
+    [19, "GFX 50S mark II", "/pic/Shop/Fuji/Cam/gfx50s-II.png", "Fujifilm", "Camera", 15979, "51.4MP, Mirrorless, Fujifilm G Bayonet"],
+    [20, "GFX 100", "/pic/Shop/Fuji/Cam/gfx100.png", "Fujifilm", "Camera", 39699, "102MP, Mirrorless, Fujifilm G Bayonet, Medium Format"],
+    
 ];
 var toggleNav = true;
 var toggleCart = true;
@@ -229,20 +247,20 @@ function filterShop(form) {
     switch (form.filter.value) {
         case "cam-sony": 
             document.getElementById("placeholder").innerHTML = `
-                <img src="/pic/Shop/Sony/Cam/zv-1-II.jpeg" />
-                <img src="/pic/Shop/Sony/Cam/a6400.jpeg" />
+                <img src="/pic/Shop/Sony/Cam/zv-1-II.png" />
+                <img src="/pic/Shop/Sony/Cam/a6400.png" />
                 <button class="top" id="show1">SHOW PRODUCT</button>
                 <button class="top" id="show2">SHOW PRODUCT</button>
-                <img src="/pic/Shop/Sony/Cam/a6600.jpeg" />
-                <img src="/pic/Shop/Sony/Cam/a6700.jpeg" />
+                <img src="/pic/Shop/Sony/Cam/a6600.png" />
+                <img src="/pic/Shop/Sony/Cam/a6700.png" />
                 <button class="top" id="show3";">SHOW PRODUCT</button>
                 <button class="top" id="show4";">SHOW PRODUCT</button>
-                <img src="/pic/Shop/Sony/Cam/a7-III.jpeg" />
-                <img src="/pic/Shop/Sony/Cam/a7-IV.jpeg" />
+                <img src="/pic/Shop/Sony/Cam/a7-III.png" />
+                <img src="/pic/Shop/Sony/Cam/a7-IV.png" />
                 <button class="top" id="show5";">SHOW PRODUCT</button>
                 <button class="top" id="show6";">SHOW PRODUCT</button>
-                <img src="/pic/Shop/Sony/Cam/a7c-II.jpeg" />
-                <img src="/pic/Shop/Sony/Cam/a1.jpeg" />
+                <img src="/pic/Shop/Sony/Cam/a7c-II.png" />
+                <img src="/pic/Shop/Sony/Cam/a1.png" />
                 <button class="top" id="show7";">SHOW PRODUCT</button>
                 <button class="top" id="show8";">SHOW PRODUCT</button>
             `;
@@ -254,7 +272,56 @@ function filterShop(form) {
             }
 
             break;
+        
+        case "cam-canon":
+            document.getElementById("placeholder").innerHTML = `
+                <img src="/pic/Shop/Canon/Cam/eos-r7.png" />
+                <img src="/pic/Shop/Canon/Cam/eos-r.png" />
+                <button class="top" id="show9">SHOW PRODUCT</button>
+                <button class="top" id="show10">SHOW PRODUCT</button>
+                <img src="/pic/Shop/Canon/Cam/eos-r6-II.png" />
+                <img src="/pic/Shop/Canon/Cam/eos-r5.png" />
+                <button class="top" id="show11";">SHOW PRODUCT</button>
+                <button class="top" id="show12";">SHOW PRODUCT</button>
+                <img src="/pic/Shop/Canon/Cam/eos-r5c.png" />
+                <img src="/pic/Shop/Canon/Cam/eos-r3.png" />
+                <button class="top" id="show13";">SHOW PRODUCT</button>
+                <button class="top" id="show14";">SHOW PRODUCT</button>
+            `;
+
+            for (let i = 9; i <= 14; i++) {
+                document.getElementById("show" + i).addEventListener("click", () => {
+                    displayProduct(i);
+                });
+            }
+
+            break;
+
+        case "cam-fuji":
+            document.getElementById("placeholder").innerHTML = `
+                <img src="/pic/Shop/Fuji/Cam/x100-VI.png" />
+                <img src="/pic/Shop/Fuji/Cam/xt30-II.png" />
+                <button class="top" id="show15">SHOW PRODUCT</button>
+                <button class="top" id="show16">SHOW PRODUCT</button>
+                <img src="/pic/Shop/Fuji/Cam/x-pro-3.png" />
+                <img src="/pic/Shop/Fuji/Cam/xt5.png" />
+                <button class="top" id="show17";">SHOW PRODUCT</button>
+                <button class="top" id="show18";">SHOW PRODUCT</button>
+                <img src="/pic/Shop/Fuji/Cam/gfx50s-II.png" />
+                <img src="/pic/Shop/Fuji/Cam/gfx100.png" />
+                <button class="top" id="show19";">SHOW PRODUCT</button>
+                <button class="top" id="show20";">SHOW PRODUCT</button>
+            `;
+    
+            for (let i = 15; i <= 20; i++) {
+                document.getElementById("show" + i).addEventListener("click", () => {
+                    displayProduct(i);
+                });
+            }
+    
+            break;
     }
+
 }
 
 
@@ -283,10 +350,13 @@ function navBar(toggleNav) {
 
 function cartBar(toggleCart) {
     if (toggleCart) {
-        document.getElementById("cart").style.flex = "1 1 1000px";
+        document.getElementById("cart").style.flex = "0 0 418px";
+        setTimeout(() => { document.getElementById("cartBottom").style.visibility = "visible"; }, 2000);
+        
         return false;
     } else {
         document.getElementById("cart").style.flex = "0 0 0px";
+        setTimeout(() => { document.getElementById("cartBottom").style.visibility = "hidden"; }, 2000);
         return true;
     }
 }
@@ -329,7 +399,16 @@ function displayCart() {
         document.getElementById("cartFill").innerHTML = '';
 
         for (var i = 0; i < cart.length; i++) {
-            document.getElementById("cartFill").innerHTML += `${cart[i][0]} X ${cart[i][1]} ${cart[i][2]} ${cart[i][3]} ---- ${cart[i][4]}<br />`;
+            document.getElementById("cartFill").innerHTML += `${cart[i][0]} X ${cart[i][1]} ${cart[i][2]} ${cart[i][3]} ---- ${cart[i][4]}₪<br />`;
         }   
     }
+}
+
+function cleanCart() {
+    const arr = sessionStorage.getItem('cart');
+    const clean = [];
+    if (arr) {
+        sessionStorage.setItem('cart', JSON.stringify(clean));
+    }
+    displayCart();
 }

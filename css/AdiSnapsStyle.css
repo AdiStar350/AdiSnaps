@@ -256,19 +256,16 @@ a:link, a:visited {
     flex-direction: column;
     transition: flex 2s ease-out;
     font-family: Futura;
-    overflow: hidden;
     flex: 0 0 0px;
-    justify-content: baseline;
-    max-width: 300px;
     align-items: center;
-    top: -40px;
+    text-align: justify;
+    text-wrap: nowrap;
+    overflow: hidden;
 }
  
 .shop {
     font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 23px;
-    height: 100vh;
-    overflow: hidden;
+    font-size: 20px;
 }
 
 .cart-button img , .cart-button {
@@ -284,4 +281,38 @@ a:link, a:visited {
 
 .temp {
     display: flex;
+}
+
+#image {
+    width: 260px;
+    height: 260px;
+}
+
+#placeholder img {
+    width: 200px !important;
+    height: 200px !important;
+}
+
+.bottom-cart {
+    position: absolute;
+    bottom: 5px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 20px;
+
+}
+
+.bottom-cart a:hover, .bottom-cart button:hover {
+    border: #FFEDDB 2px solid !important;
+    background-color: #BF9270 !important;
+
+}
+
+.bottom-cart :is(a, button) {
+    background-color: white;
+}
+
+.fill {
+    overflow: scroll;
 }
