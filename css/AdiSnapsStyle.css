@@ -77,7 +77,7 @@ body {
     gap: 50px;
 }
 
-.about-me-1, .about-me-2, .photos, .gear, .learn, .contact, .submit, .shop {
+.about-me-1, .about-me-2, .photos, .gear, .learn, .contact, .submit, .shop, .sent{
     align-items: center;
     justify-content: space-evenly;
     display: flex;
@@ -122,7 +122,7 @@ a:link, a:visited {
     text-decoration: none;
 }
 
-.learn h1, .gear h1, .photos span, .about-me-2 h1, .contact h1, .shop h1 {
+.learn h1, .gear h1, .photos span, .about-me-2 h1, .contact h1, .shop h1, .sent h1 {
     font-family: Snell Roundhand;
     font-size: 65px;
 }

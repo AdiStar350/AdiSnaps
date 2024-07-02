@@ -224,6 +224,7 @@ class User {
         this.reason = reason;
         this.area = area;
         this.more = more;
+        this.error = "";
         this.passed = true;
 
     }
@@ -233,7 +234,7 @@ class User {
             this.firstName = value;
         } else {
             this.passed = false;
-            alert("You entered an invalid first name!");
+            this.error += "You entered an invalid first name!\n";
         }
     }
 
@@ -244,7 +245,7 @@ class User {
             this.lastName = value;
         } else {
             this.passed = false;
-            alert("You entered an invalid last name!");
+            this.error += "You entered an invalid last name!\n";
         }
     }
 
@@ -255,7 +256,7 @@ class User {
             this.email = value;
         } else {
             this.passed = false;
-            alert("Please enter a correct email address!");
+            this.error += "Please enter a correct email address!\n";
         }
     }
 
@@ -270,7 +271,7 @@ class User {
         }
 
         this.passed = false;
-        alert("Please state the reason for contacting me!");
+        this.error += "Please state the reason for contacting me!\n";
     }
 
     get getReason() { return this.reason; }
@@ -280,7 +281,7 @@ class User {
             this.area = value;
         } else {
             this.passed = false;
-            alert("Please choose or enter an area!");
+            this.error += "Please choose or enter an area!\n";
         }
     }
 
@@ -356,7 +357,11 @@ function isOk(form) {
     u.setArea = form.area.value;
     u.setMore = form.freeText.value;
 
-    return this.passed;
+    if (!u.passed) {
+        alert(u.error);
+    }
+
+    return u.passed;
 }
 
 
@@ -488,16 +493,16 @@ function filterShop(form) {
 
             case "lens-fuji":
                 document.getElementById("placeholder").innerHTML = `
-                    <img src="/pic/Shop/Fuji/Lens/85.png" />
-                    <img src="/pic/Shop/Fuji/Lens/28-70.png" />
+                    <img src="/pic/Shop/Fuji/Lens/150-600.png" />
+                    <img src="/pic/Shop/Fuji/Lens/56.png" />
                     <button class="top" id="show33">SHOW PRODUCT</button>
                     <button class="top" id="show34">SHOW PRODUCT</button>
-                    <img src="/pic/Shop/Fuji/Lens/70-200.png" />
-                    <img src="/pic/Shop/Fuji/Lens/100-500.png" />
+                    <img src="/pic/Shop/Fuji/Lens/18.png" />
+                    <img src="/pic/Shop/Fuji/Lens/80.png" />
                     <button class="top" id="show35";">SHOW PRODUCT</button>
                     <button class="top" id="show36";">SHOW PRODUCT</button>
-                    <img src="/pic/Shop/Fuji/Lens/15-35.png" />
-                    <img src="/pic/Shop/Fuji/Lens/135.png" />
+                    <img src="/pic/Shop/Fuji/Lens/32-64.png" />
+                    <img src="/pic/Shop/Fuji/Lens/120.png" />
                     <button class="top" id="show37";">SHOW PRODUCT</button>
                     <button class="top" id="show38";">SHOW PRODUCT</button>
                 `;
