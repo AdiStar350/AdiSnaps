@@ -24,7 +24,7 @@ class Product {
     }
 
     set setPicture(val) {
-        if (/^pic\/Shop\/[a-zA-z]{1,}.jpeg$/.test(val)) {
+        if (/^pic\/Shop\/[a-zA-z]{1,}.png$/.test(val)) {
             this.picture = val;
         } else {
             prompt("Error: Invalid Picture Src");
