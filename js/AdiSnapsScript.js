@@ -215,6 +215,91 @@ class Product {
     }
 }
 
+
+class User {
+    constructor(firstName, lastName, email, reason, area, more) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.reason = reason;
+        this.area = area;
+        this.more = more;
+        this.passed = true;
+
+    }
+
+    set setFirstName(value) {
+        if (/^[a-zA-Zא-ת]{2,}$/i.test(value)) {
+            this.firstName = value;
+        } else {
+            this.passed = false;
+            alert("You entered an invalid first name!");
+        }
+    }
+
+    get getFirstName() { return this.firstName; }
+
+    set setLastName(value) {
+        if (/^[a-zA-Zא-ת]{2,}$/i.test(value)) {
+            this.lastName = value;
+        } else {
+            this.passed = false;
+            alert("You entered an invalid last name!");
+        }
+    }
+
+    get getLastName() { return this.lastName; }
+
+    set setEmail(value) {
+        if (/^[a-zA-Z\d!#$%&'*+-/=?^_{|}~`.]+@[a-zA-Z.\d-]+.[a-zA-Z]{2,} {0,}$/i.test(value)) {
+            this.email = value;
+        } else {
+            this.passed = false;
+            alert("Please enter a correct email address!");
+        }
+    }
+
+    get getEmail() { return this.email; }
+
+    set setReason(value) {
+        for (var i = 0; i < value.length; i++) {
+            if (value[i].checked) {
+                this.reason = value[i].checked.value;
+                return;
+            }
+        }
+
+        this.passed = false;
+        alert("Please state the reason for contacting me!");
+    }
+
+    get getReason() { return this.reason; }
+
+    set setArea(value) {
+        if (/^[a-zA-Z]+$/.test(value)) {
+            this.area = value;
+        } else {
+            this.passed = false;
+            alert("Please choose or enter an area!");
+        }
+    }
+
+    set setMore(value) { this.more = value; }
+
+    get getMore() { return this.more; }
+
+    toString() {
+        return `
+            Name: ${this.firstName} ${this.lastName}
+            Email: ${this.email}
+            Reason: ${this.reason}
+            Area: ${this.area}
+            More: ${this.more}
+        `;
+    }
+}
+
+
 const warehouse = [
     [1, "ZV-1 mark II", "/pic/Shop/Sony/Cam/zv-1-II.png", "Sony", "Camera", 3969, "18-50mm Fixed Lens, 3840 x 2160 Video Resolution, 20.1MP, Mirrorless"],
     [2, "A6400", "/pic/Shop/Sony/Cam/a6400.png", "Sony", "Camera", 3149, "Mirrorless, For Sony E Mount"],
@@ -234,13 +319,45 @@ const warehouse = [
     [16, "XT30 mark II", "/pic/Shop/Fuji/Cam/xt30-II.png", "Fujifilm", "Camera", 3449, "26.1MP, Mirrorless, Can Emulate Film"],
     [17, "X Pro 3", "/pic/Shop/Fuji/Cam/x-pro-3.png", "Fujifilm", "Camera", 6859, "26.1MP, Mirrorless, Can Emulate Film"],
     [18, "XT5", "/pic/Shop/Fuji/Cam/xt5.png", "Fujifilm", "Camera", 6979, "40.2MP, Mirrorless"],
-    [19, "GFX 50S mark II", "/pic/Shop/Fuji/Cam/gfx50s-II.png", "Fujifilm", "Camera", 15979, "51.4MP, Mirrorless, Fujifilm G Bayonet"],
-    [20, "GFX 100", "/pic/Shop/Fuji/Cam/gfx100.png", "Fujifilm", "Camera", 39699, "102MP, Mirrorless, Fujifilm G Bayonet, Medium Format"],
+    [19, "GFX 50S mark II", "/pic/Shop/Fuji/Cam/gfx50s-II.png", "Fujifilm", "Camera", 15979, "51.4MP, Mirrorless, Fujifilm G Mount"],
+    [20, "GFX 100", "/pic/Shop/Fuji/Cam/gfx100.png", "Fujifilm", "Camera", 39699, "102MP, Mirrorless, Fujifilm G Mount, Medium Format"],
+    [21, "FE 70-200mm f/2.8 GM OSS II", "/pic/Shop/Sony/Lens/70-200.png", "Sony", "Lens", 10699, "For Sony E Mount, 77mm Filter Size, f/2.8 Telephoto"],
+    [22, "FE 50mm f/1.2 GM", "/pic/Shop/Sony/Lens/50.png", "Sony", "Lens", 7739, "For Sony E Mount, 72mm Filter Size, f/1.2 Normal"],
+    [23, "FE 16-35mm f/2.8 GM II", "/pic/Shop/Sony/Lens/16-35.png", "Sony", "Lens", 9879, "For Sony E Mount, 82mm Filter Size, f/2.8 Wide"],
+    [24, "FE 24-70mm f/2.8 GM II", "/pic/Shop/Sony/Lens/24-70.png", "Sony", "Lens", 8249, "For Sony E Mount, 82mm Filter Size, f/2.8 Wide"],
+    [25, "FE 100-400mm f/4.5-5.6 GM OSS", "/pic/Shop/Sony/Lens/100-400.png", "Sony", "Lens", 8999, "For Sony E Mount, 77mm Filter Size, f/4.5-5.6 Telephoto"],
+    [26, "FE 200-600mm f/5.6-6.3 G OSS", "/pic/Shop/Sony/Lens/200-600.png", "Sony", "Lens", 6979, "For Sony E Mount, 95mm Filter Size, f/5.6-6.3 Telephoto"],
+    [27, "RF 85mm f/1.2L USM DS", "/pic/Shop/Canon/Lens/85.png", "Canon", "Lens", 12479, "For Canon RF Mount, 82mm Filter Size, f/1.2 Normal"],
+    [28, "RF 28-70mm f/2L USM", "/pic/Shop/Canon/Lens/28-70.png", "Canon", "Lens", 11579, "For Canon RF Mount, 95mm Filter Size, f/2 Telephoto"],
+    [29, "RF 70-200mm f/2.8 IS RF USM", "/pic/Shop/Canon/Lens/70-200.png", "Canon", "Lens", 11479, "For Canon RF Mount, 77mm Filter Size, f/2.8 Telephoto"],
+    [30, "RF 100-500mm f/4.5-7.1L IS USM", "/pic/Shop/Canon/Lens/100-500.png", "Canon", "Lens", 11679, "For Canon RF Mount, 77mm Filter Size, f/4.5-7.1 Telephoto"],
+    [31, "RF 15-35mm f/2.8 IS RF USM", "/pic/Shop/Canon/Lens/15-35.png", "Canon", "Lens", 9699, "For Canon RF Mount, 82mm Filter Size, f/2.8 Wide"],
+    [32, "RF 135mm f/1.8 USM", "/pic/Shop/Canon/Lens/135.png", "Canon", "Lens", 9499, "For Canon RF Mount, 82mm Filter Size, f/1.8 Medium Telephoto"],
+    [33, "XF 150-600mm f/5.6-8 R LM", "/pic/Shop/Fuji/Lens/150-600.png", "Fujifilm", "Lens", 8199, "For Fujifilm X Mount, 82mm Filter Size, f/5.6-8 Super Telephoto"],
+    [34, "XF 56mm f/1.2 R WR", "/pic/Shop/Fuji/Lens/56.png", "Fujifilm", "Lens", 3969, "For Fujifilm X Mount, 67mm Filter Size, f/1.2 Normal"],
+    [35, "XF 18mm f/1.4 R LM WR", "/pic/Shop/Fuji/Lens/18.png", "Fujifilm", "Lens", 3899, "For Fujifilm X Mount, 62mm Filter Size, f/1.4 Normal"],
+    [36, "XF lens XF 80mm f/2.8 R LM OIS WR MACRO", "/pic/Shop/Fuji/Lens/80.png", "Fujifilm", "Lens", 4550, "For Fujifilm X Mount, 62mm Filter Size, f/2.8 Telephoto"],
+    [37, "G lens GF 32-64mm f/4 WR", "/pic/Shop/Fuji/Lens/32-64.png", "Fujifilm", "Lens", 9099, "For Fujifilm G Mount, 77mm Filter Size, f/4 Normal"],
+    [38, "G lens GF 120mm f/4 Macro OIS", "/pic/Shop/Fuji/Lens/120.png", "Fujifilm", "Lens", 10699, "For Fujifilm G Mount, 72mm Filter Size, f/4 Medium Telephoto Macro"],
     
 ];
 var toggleNav = true;
 var toggleCart = true;
 var cart = [];
+
+
+function isOk(form) {
+    var u = new User();
+
+    u.setFirstName = form.firstName.value;
+    u.setLastName = form.lastName.value;
+    u.setEmail = form.email.value;
+    u.setReason = form.reason;
+    u.setArea = form.area.value;
+    u.setMore = form.freeText.value;
+
+    return this.passed;
+}
 
 
 function filterShop(form) {
@@ -320,6 +437,78 @@ function filterShop(form) {
             }
     
             break;
+
+        case "lens-sony":
+            document.getElementById("placeholder").innerHTML = `
+                <img src="/pic/Shop/Sony/Lens/70-200.png" />
+                <img src="/pic/Shop/Sony/Lens/50.png" />
+                <button class="top" id="show21">SHOW PRODUCT</button>
+                <button class="top" id="show22">SHOW PRODUCT</button>
+                <img src="/pic/Shop/Sony/Lens/16-35.png" />
+                <img src="/pic/Shop/Sony/Lens/24-70.png" />
+                <button class="top" id="show23";">SHOW PRODUCT</button>
+                <button class="top" id="show24";">SHOW PRODUCT</button>
+                <img src="/pic/Shop/Sony/Lens/100-400.png" />
+                <img src="/pic/Shop/Sony/Lens/200-600.png" />
+                <button class="top" id="show25";">SHOW PRODUCT</button>
+                <button class="top" id="show26";">SHOW PRODUCT</button>
+            `;
+        
+            for (let i = 21; i <= 26; i++) {
+                document.getElementById("show" + i).addEventListener("click", () => {
+                    displayProduct(i);
+                });
+            }
+        
+            break;
+            
+            case "lens-canon":
+                document.getElementById("placeholder").innerHTML = `
+                    <img src="/pic/Shop/Canon/Lens/85.png" />
+                    <img src="/pic/Shop/Canon/Lens/28-70.png" />
+                    <button class="top" id="show27">SHOW PRODUCT</button>
+                    <button class="top" id="show28">SHOW PRODUCT</button>
+                    <img src="/pic/Shop/Canon/Lens/70-200.png" />
+                    <img src="/pic/Shop/Canon/Lens/100-500.png" />
+                    <button class="top" id="show29";">SHOW PRODUCT</button>
+                    <button class="top" id="show30";">SHOW PRODUCT</button>
+                    <img src="/pic/Shop/Canon/Lens/15-35.png" />
+                    <img src="/pic/Shop/Canon/Lens/135.png" />
+                    <button class="top" id="show31";">SHOW PRODUCT</button>
+                    <button class="top" id="show32";">SHOW PRODUCT</button>
+                `;
+            
+                for (let i = 27; i <= 32; i++) {
+                    document.getElementById("show" + i).addEventListener("click", () => {
+                        displayProduct(i);
+                    });
+                }
+            
+                break;
+
+            case "lens-fuji":
+                document.getElementById("placeholder").innerHTML = `
+                    <img src="/pic/Shop/Fuji/Lens/85.png" />
+                    <img src="/pic/Shop/Fuji/Lens/28-70.png" />
+                    <button class="top" id="show33">SHOW PRODUCT</button>
+                    <button class="top" id="show34">SHOW PRODUCT</button>
+                    <img src="/pic/Shop/Fuji/Lens/70-200.png" />
+                    <img src="/pic/Shop/Fuji/Lens/100-500.png" />
+                    <button class="top" id="show35";">SHOW PRODUCT</button>
+                    <button class="top" id="show36";">SHOW PRODUCT</button>
+                    <img src="/pic/Shop/Fuji/Lens/15-35.png" />
+                    <img src="/pic/Shop/Fuji/Lens/135.png" />
+                    <button class="top" id="show37";">SHOW PRODUCT</button>
+                    <button class="top" id="show38";">SHOW PRODUCT</button>
+                `;
+            
+                for (let i = 33; i <= 38; i++) {
+                    document.getElementById("show" + i).addEventListener("click", () => {
+                        displayProduct(i);
+                    });
+                }
+            
+                break;
     }
 
 }
