@@ -19,9 +19,11 @@ class Product {
         }
     }
 
-    set setName(val) {
-        this.productName = val;
-    }
+    get getID() { return this.id; }
+
+    set setName(val) { this.productName = val; }
+
+    get getName() { return this.productName; }
 
     set setPicture(val) {
         if (/^pic\/Shop\/[a-zA-z]{1,}.png$/.test(val)) {
@@ -31,6 +33,8 @@ class Product {
         }
     }
 
+    get getPicture() { return this.picture; }
+
     set setBrand(val) {
         if (/^[a-z]/i.test(val)) {
             this.brand = val;
@@ -38,6 +42,8 @@ class Product {
             prompt("Error: Invalid Brand");
         }
     }
+
+    get getBrand() { return this.brand; }
 
     set setType(val) {
         if (/^[a-z]/i.test(val)) {
@@ -47,6 +53,8 @@ class Product {
         }
     }
 
+    get getType() { return this.type; }
+
     set setPrice(val) {
         if (!isNaN(val)) {
             this.price = val * 1;
@@ -54,6 +62,8 @@ class Product {
             prompt("Error: Invalid Price");
         }
     }
+
+    get getPrice() { return this.price; }
 
     set setQuantity(val) {
         if (!isNaN(val)) {
@@ -63,6 +73,8 @@ class Product {
         } 
     }
 
+    get getQuantity() { return this.quantity; }
+
     set setOther(val) {
         if (/^[a-z,]/i.test(val)) {
             this.other = val;
@@ -70,6 +82,8 @@ class Product {
             prompt("Error: Invalid Other");
         }
     }
+
+    get getOther() { return this.other; }
      
     set setTotal(val) {
         if (!isNaN(val)) {
@@ -79,43 +93,8 @@ class Product {
         } 
     }
 
-    get getID() {
-        return this.id;
-    }
-
-    get getName() {
-        return this.productName;
-    }
-
-    get getPicture() {
-        return this.picture;
-    }
-
-    get getBrand() {
-        return this.brand;
-    }
-
-    get getType() {
-        return this.type;
-    }
-
-    get getPrice() {
-        return this.price;
-    }
-
-    get getQuantity() {
-        return this.quantity;
-    }
-
-    get getOther() {
-        return this.other;
-    }
-
-    get getTotal() {
-        return this.total;
-    }
+    get getTotal() { return this.total; }
  
-    
     toString() {
         return `
             <link rel="stylesheet" href="/css/AdiSnapsStyle.css" />
@@ -563,7 +542,7 @@ function lock() {
 
 
 function login(form) {
-    if (/^[\d]{9}$/.test(form.password.value) && /^[a-z]{3,}$/i.test(form.username.value)) {
+    if (/^211862511$/.test(form.password.value) && /^adistrasser$/.test(form.username.value)) {
         document.getElementById("waker").style.visibility = "hidden";
         document.getElementById("container").style.filter = "none";
         setInterval('lock();', 300000);
@@ -606,3 +585,4 @@ function cleanCart() {
     }
     displayCart();
 }
+
