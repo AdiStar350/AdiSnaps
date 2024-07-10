@@ -5,88 +5,55 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="/css/AdiSnapsStyle.css" />
-        <link rel="stylesheet" href="/css/Bought.css" />
+		<script src="/js/AdiSnapsScript.js"></script>
     </head>
     <body>
-        <div class="shop">
+        <div class="checkout">
             <div class="container">
-                <form name="cardForm" action="">
-                  <!-- creating a form using "form" tag-->
-                  <hr />
-                  <h1 class="main_heading">Payment Form</h1>
-                  <p><span>*</span> <b>marked places are must to be filled</b></p>
-                  <hr />
-                  <h2>PERSONAL INFORMATION</h2>
-                  <p> NAME<span>*</span> :<input type="text" id="round" name="name" required
-                                    oninvalid="this.setCustomValidity('Enter your awesome full name here please')"
-                                    oninput="this.setCustomValidity('')"/></p>
-                  <!-- "required" this tag means that we have to fill that place mandatory-->
-                  <fieldset>
-                    <legend> CHOOSE GENDER<span>*</span></legend>
-                    <p>
-                      <input type="radio" name="gender" id="male" />
-                      <label for="male">Male</label>
-                      <input type="radio" name="gender" id="female" />
-                      <label for="female">Female</label>
-                      <input type="radio" name="gender" id="others" />
-                      <label for="others">Others</label>
-                    </p>
-                  </fieldset>
-                  <p> ADDDRESS<span>*</span> :
-                    <textarea name="Address" id="Address" cols="100" rows="8" required></textarea>
-                    <!-- adding a blank text area for writing adress-->
-                  </p>
-                  <p> Email<span>*</span> : <input type="email" name="email" id="email" required
-                                     oninvalid="this.setCustomValidity('Enter correct email address please')"
-                                     oninput="this.setCustomValidity('')"/>
-                  <hr />
-                  <h2><b>PAYMENT INFORMATION</b></h2>
-                  <p>
-                     Card Type<span>*</span>:-
-                    <select name="Card_type" id="Card_type" required>
-                      <option value="">--Select A Card Type--</option>
-                      <option value="Visa">Visa</option>
-                      <option value="Master Card">Master Card</option>
-                      <option value="RuPay">Rupay</option>
-                      <option value="Credit/Debit">Credit or Debit</option>
-                    </select>
-                  </p>
-                  <p>
-                    Card Number<span>*</span>:-
-                    <input type="number" name="card_number" id="card_number" required pattern="[0-9]{13,16}"
-                           oninvalid="this.setCustomValidity('Add correct card data here with correct length')"
-                           oninput="this.setCustomValidity('')"/>
-                  </p>
-                  <p>
-                    Card Expiry Date<span>*</span>:-
-                    <input type="date" name="Expiry_date" id="Expiry_date" required />
-                  </p>
-                  <p>
-                    CVV<span>*</span>:-
-                    <input type="password" name="CVV" id="CVV" maxlength="3" required pattern="[0-9]{3}"
-                           oninvalid="this.setCustomValidity('CVV needs to be 3 numbers long, no letters')"
-                           oninput="this.setCustomValidity('')"/>
-                  </p>
-                  <input id="payNowBtn" class="btn" type="submit" value="SUBMIT DETAILS & PAY NOW" />
+                <form name="cardForm" action="/html/Shop.html" onsubmit="return finishOrder(cardForm)">
+                  	<hr />
+                  	<h1 class="main_heading">Payment Form</h1>
+                  	<p><span>*</span> <b>marked places are must to be filled</b></p>
+                  	<hr />
+                  	<h2>PERSONAL INFORMATION</h2>
+                  	<p> FIRST NAME<span>*</span> :<input type="text" name="firstName" /></p>
+					<p> LAST NAME<span>*</span> :<input type="text" name="lastName" /></p>
+                  	<fieldset>
+						<legend> CHOOSE GENDER<span>*</span></legend>
+						<div>
+							<input type="radio" name="gender" id="male" value="M" />
+							<label for="male">Male</label>
+						</div>
+						<div>
+							<input type="radio" name="gender" id="female" value="F" />
+							<label for="female">Female</label>
+						</div>
+						<div>
+							<input type="radio" name="gender" id="other" value="O"/>
+							<label for="other">Other</label>
+						</div>
+                  	</fieldset>
+					<p> ADDRESS<span>*</span> :
+						<textarea name="address" cols="100" rows="8"></textarea>
+					</p>
+                  	<p> EMAIL<span>*</span> : <input type="text" name="email" />
+                  	<hr />
+                  	<h2><b>PAYMENT INFORMATION</b></h2>
+					<p>
+						Card Number<span>*</span>:-
+						<input type="number" name="card_number" />
+					</p>
+					<p>
+						Card Expiration Date<span>*</span>:-
+						<input type="date" name="exp_date" />
+					</p>
+					<p>
+						CVV<span>*</span>:-
+						<input type="password" name="cvv" />
+					</p>
+                  	<input id="payNowBtn" class="top" type="submit" value="SUBMIT & PAY" />
                 </form>
-              </div>
+            </div>
         </div>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-    var payNowBtn = document.getElementById('payNowBtn');
-    
-    payNowBtn.addEventListener('click', function(event) {
-        event.preventDefault(); // Esto evita que el formulario se envíe automáticamente
-        
-        // Aquí puedes agregar cualquier lógica adicional para procesar el pago
-        
-        // Muestra la alerta
-        alert('The purchase has been successful');
-        
-        // Si quieres que el formulario se envíe después de mostrar la alerta, puedes descomentar la siguiente línea:
-        // event.target.form.submit();
-    });
-});
-        </script>
     </body>
 </html>

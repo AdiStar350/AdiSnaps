@@ -174,6 +174,7 @@ class Product {
             cart.push(item);
             sessionStorage.setItem('cart', JSON.stringify(cart));
             displayCart();
+            document.getElementById("cartBottom").style.visibility = "visible";
         };
 
         document.getElementById("incrementButton").onclick = () => {
@@ -272,13 +273,96 @@ class User {
         return `
             Name: ${this.firstName} ${this.lastName}
             Email: ${this.email}
-            Reason: ${this.reason}
+            Reason: ${this.reason.checked.value}
             Area: ${this.area}
             More: ${this.more}
-        `;
+            `;
     }
 }
 
+
+class Order extends User {
+    constructor(firstName, lastName, email, gender, address, cardNum, cardExp, cardCvv, error, passed) {
+        super(firstName, lastName, email, error, passed);
+        this.name = `${this.firstName} ${this.lastName}`;
+        this.gender = gender;
+        this.address = address;
+        this.cardNum = cardNum;
+        this.cardExp = cardExp;
+        this.cardCvv = cardCvv;
+    }
+
+    set setGender(value) {
+        for (var i = 0; i < value.length; i++) {
+            if (value[i].checked) {
+                this.reason = value[i].checked.value;
+                return;
+            }
+        }
+        this.error += "Please enter a valid gender.\n";
+        this.passed = false;
+    }
+
+    get getGender() { return this.gender; }
+
+    set setAddress(value) {
+        if (/^[a-zA-Z]+[ ,]+[a-zA-Z]+[ ,]+[\d]+$/.test(value)) {
+            this.address = value;
+        } else {
+            this.error += "Please enter a valid address.\n";
+            this.passed = false;
+        }
+    }
+
+    get getAdress() { return this.address; }
+
+    set setCardNum(value) {
+        if (/^\d{16}$/.test(value)) {
+            this.cardNum = value;
+        } else {
+            this.error += "Please enter a valid card number.\n";
+            this.passed = false;
+        }
+    }
+
+    get getCardNum() { return this.cardNum; }
+    
+    set setCardExp(value) {
+        const today = new Date();
+        const expDate = new Date(value);
+
+        if (expDate > today) {
+            this.cardExp = value;
+        } else {
+            this.error += "Please enter a valid future expiration date.\n";
+            this.passed = false;
+        }
+    }
+        
+
+    get getCardExp() { return this.cardExp; }
+
+    set setCardCvv(value) {
+        if (/^\d{3}$/.test(value)) {
+            this.cardCvv = value;
+        } else {
+            this.error += "Please enter a valid 3 or 4 digit CVV.\n";
+            this.passed = false; 
+        }
+    }
+        
+    get getCardCvv() { return this.cardCvv; }
+
+    toString() {
+        return `
+            Name: ${this.name}
+            Email: ${this.email}
+            Gender: ${this.gender.checked.value}
+            Address: ${this.address}
+            Card: ${this.cardNum} ${this.cardExp} ${this.cardCvv}
+        `;
+    }    
+}
 
 const warehouse = [
     [1, "ZV-1 mark II", "/pic/Shop/Sony/Cam/zv-1-II.png", "Sony", "Camera", 3969, "18-50mm Fixed Lens, 3840 x 2160 Video Resolution, 20.1MP, Mirrorless"],
@@ -343,6 +427,27 @@ function isOk(form) {
     return u.passed;
 }
 
+function finishOrder(form) {
+    var o = new Order();
+
+    o.setFirstName = form.firstName.value;
+    o.setLastName = form.lastName.value;
+    o.setGender = form.gender;
+    o.setAddress = form.address.value;
+    o.setEmail = form.email.value;
+    o.setCardNum = form.card_number.value;
+    o.setCardExp = form.exp_date.value;
+    o.setCardCvv = form.cvv.value;
+
+    if (!o.passed) {
+        alert(o.error);
+    } else {
+        alert("Purchase Successful!");
+        cleanCart();
+    }
+
+    return o.passed;
+}
 
 function filterShop(form) {
     switch (form.filter.value) {
@@ -493,8 +598,34 @@ function filterShop(form) {
                 }
             
                 break;
-    }
+            
+            case "other":
+                document.getElementById("placeholder").innerHTML = `
+                    <img src="/pic/Shop/Fuji/Lens/150-600.png" />
+                    <img src="/pic/Shop/Fuji/Lens/56.png" />
+                    <button class="top" id="show33">SHOW PRODUCT</button>
+                    <button class="top" id="show34">SHOW PRODUCT</button>
+                    <img src="/pic/Shop/Fuji/Lens/18.png" />
+                    <img src="/pic/Shop/Fuji/Lens/80.png" />
+                    <button class="top" id="show35";">SHOW PRODUCT</button>
+                    <button class="top" id="show36";">SHOW PRODUCT</button>
+                    <img src="/pic/Shop/Fuji/Lens/32-64.png" />
+                    <img src="/pic/Shop/Fuji/Lens/120.png" />
+                    <button class="top" id="show37";">SHOW PRODUCT</button>
+                    <button class="top" id="show38";">SHOW PRODUCT</button>
+                `;
+            
+                for (let i = 33; i <= 38; i++) {
+                    document.getElementById("show" + i).addEventListener("click", () => {
+                        displayProduct(i);
+                    });
+                }
 
+                break;
+
+            default:
+                console.log("Something went wrong!");
+    }
 }
 
 
@@ -520,23 +651,42 @@ function navBar(toggleNav) {
     }
 }
 
+function compareArr(arr1, arr2) {
+    if (arr1.length !== arr2.length) {
+        return false;
+    } else {
+        for (var i = 0; i < arr1.length; i++) {
+            if (arr1[i] !== arr2[i]) {
+                return false;
+            }
+        }
+    }
+    
+    return true;
+}
 
 function cartBar(toggleCart) {
+    const arr = sessionStorage.getItem('cart');
+    cart = arr ? JSON.parse(arr) : [];
+
     if (toggleCart) {
         document.getElementById("cart").style.flex = "0 0 418px";
-        setTimeout(() => { document.getElementById("cartBottom").style.visibility = "visible"; }, 2000);
-        
+
+        if (!compareArr(cart, [])) {
+            setTimeout(() => { document.getElementById("cartBottom").style.visibility = "visible"; }, 2000);
+        }
+
         return false;
     } else {
         document.getElementById("cart").style.flex = "0 0 0px";
-        setTimeout(() => { document.getElementById("cartBottom").style.visibility = "hidden"; }, 2000);
+        document.getElementById("cartBottom").style.visibility = "hidden";
         return true;
     }
 }
 
 
 function lock() {
-    document.getElementById("container").style.filter = "blur(20px)";
+    document.getElementById("container").style.filter = "blur(20px) brightness(50%)";
     document.getElementById("waker").style.visibility = "visible";
 }
 
@@ -545,7 +695,7 @@ function login(form) {
     if (/^211862511$/.test(form.password.value) && /^adistrasser$/.test(form.username.value)) {
         document.getElementById("waker").style.visibility = "hidden";
         document.getElementById("container").style.filter = "none";
-        setInterval('lock();', 300000);
+        setInterval('lock();', 100000000);
     } else {
         alert("Try again!");
     }
@@ -580,9 +730,17 @@ function displayCart() {
 function cleanCart() {
     const arr = sessionStorage.getItem('cart');
     const clean = [];
+
     if (arr) {
         sessionStorage.setItem('cart', JSON.stringify(clean));
     }
+
     displayCart();
+
+    document.getElementById("cartBottom").style.visibility = "hidden";
+
+
+    
+
 }
 
