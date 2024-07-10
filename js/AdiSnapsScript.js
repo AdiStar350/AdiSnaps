@@ -403,7 +403,7 @@ const warehouse = [
     [36, "XF lens XF 80mm f/2.8 R LM OIS WR MACRO", "/pic/Shop/Fuji/Lens/80.png", "Fujifilm", "Lens", 4550, "For Fujifilm X Mount, 62mm Filter Size, f/2.8 Telephoto"],
     [37, "G lens GF 32-64mm f/4 WR", "/pic/Shop/Fuji/Lens/32-64.png", "Fujifilm", "Lens", 9099, "For Fujifilm G Mount, 77mm Filter Size, f/4 Normal"],
     [38, "G lens GF 120mm f/4 Macro OIS", "/pic/Shop/Fuji/Lens/120.png", "Fujifilm", "Lens", 10699, "For Fujifilm G Mount, 72mm Filter Size, f/4 Medium Telephoto Macro"],
-    
+    // TODO -> Add more products for the "Other" category.
 ];
 var toggleNav = true;
 var toggleCart = true;
@@ -600,22 +600,24 @@ function filterShop(form) {
                 break;
             
             case "other":
+                // TODO -> Add view for the "Other" items and replace XXX with urls for pictures and product id.
                 document.getElementById("placeholder").innerHTML = `
-                    <img src="/pic/Shop/Fuji/Lens/150-600.png" />
-                    <img src="/pic/Shop/Fuji/Lens/56.png" />
-                    <button class="top" id="show33">SHOW PRODUCT</button>
-                    <button class="top" id="show34">SHOW PRODUCT</button>
-                    <img src="/pic/Shop/Fuji/Lens/18.png" />
-                    <img src="/pic/Shop/Fuji/Lens/80.png" />
-                    <button class="top" id="show35";">SHOW PRODUCT</button>
-                    <button class="top" id="show36";">SHOW PRODUCT</button>
-                    <img src="/pic/Shop/Fuji/Lens/32-64.png" />
-                    <img src="/pic/Shop/Fuji/Lens/120.png" />
-                    <button class="top" id="show37";">SHOW PRODUCT</button>
-                    <button class="top" id="show38";">SHOW PRODUCT</button>
+                    <img src="/pic/Shop/Fuji/Lens/XXX" />
+                    <img src="/pic/Shop/Fuji/Lens/XXX" />
+                    <button class="top" id="showXXX">SHOW PRODUCT</button>
+                    <button class="top" id="showXXX">SHOW PRODUCT</button>
+                    <img src="/pic/Shop/Fuji/Lens/XXX" />
+                    <img src="/pic/Shop/Fuji/Lens/XXX" />
+                    <button class="top" id="showXXX";">SHOW PRODUCT</button>
+                    <button class="top" id="showXXX";">SHOW PRODUCT</button>
+                    <img src="/pic/Shop/Fuji/Lens/XXX" />
+                    <img src="/pic/Shop/Fuji/Lens/XXX" />
+                    <button class="top" id="showXXX";">SHOW PRODUCT</button>
+                    <button class="top" id="showXXX";">SHOW PRODUCT</button>
                 `;
-            
-                for (let i = 33; i <= 38; i++) {
+                
+                // TODO -> Replace XXX with range.
+                for (let i = XXX; i <= XXX; i++) {
                     document.getElementById("show" + i).addEventListener("click", () => {
                         displayProduct(i);
                     });
@@ -738,9 +740,4 @@ function cleanCart() {
     displayCart();
 
     document.getElementById("cartBottom").style.visibility = "hidden";
-
-
-    
-
 }
-
