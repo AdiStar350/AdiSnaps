@@ -174,7 +174,10 @@ class Product {
             cart.push(item);
             sessionStorage.setItem('cart', JSON.stringify(cart));
             displayCart();
-            document.getElementById("cartBottom").style.visibility = "visible";
+
+            if (!toggleCart) {
+                document.getElementById("cartBottom").style.visibility = "visible";
+            }
         };
 
         document.getElementById("incrementButton").onclick = () => {
@@ -403,7 +406,14 @@ const warehouse = [
     [36, "XF lens XF 80mm f/2.8 R LM OIS WR MACRO", "/pic/Shop/Fuji/Lens/80.png", "Fujifilm", "Lens", 4550, "For Fujifilm X Mount, 62mm Filter Size, f/2.8 Telephoto"],
     [37, "G lens GF 32-64mm f/4 WR", "/pic/Shop/Fuji/Lens/32-64.png", "Fujifilm", "Lens", 9099, "For Fujifilm G Mount, 77mm Filter Size, f/4 Normal"],
     [38, "G lens GF 120mm f/4 Macro OIS", "/pic/Shop/Fuji/Lens/120.png", "Fujifilm", "Lens", 10699, "For Fujifilm G Mount, 72mm Filter Size, f/4 Medium Telephoto Macro"],
-    // TODO -> Add more products for the "Other" category.
+    [39, "MEFOTO Aluminum A2340LQ2 Blue", "/pic/Shop/Other/Tri1.png", "Benro", "Tripod", 399, "Aluminum, 3.6kg, 1.5m, 8kg Load Capacity"],
+    [40, "Peak Design Tripod Carbon Fiber", "/pic/Shop/Other/Tri2.png", "Peak Design", "Tripod", 2599, "Carbon Fiber, 1.27kg, 1.5m, 9kg Load Capacity"],
+    [41, "SanDisk 128GB Extreme PRO UHS-II SDXC Memory Card 300mb/s", "/pic/Shop/Other/Mem1.png", "SanDisk", "Memory Card", 949, "128GB, UHS-II, 300mb/s"],
+    [42, "SONY 256GB SF-M UHS-II SDXC V60", "/pic/Shop/Other/Mem2.png", "Sony", "Memory Card", 549, "256GB, UHS-II, V60"],
+    [43, "PEAK DESIGN BACKPACK 30L Charcoal", "/pic/Shop/Other/Bag.png", "Peak Design", "Bag", 1299, "30L, Charcoal, 1.8kg"],
+    [44, "LEE Filters 100mm System Landscape Kit", "/pic/Shop/Other/Filter.png", "LEE Filters", "Filter", 999, "100mm, Landscape Kit, 3 Filters"],
+    [45, "Peak Design Slide Sling Strap (v3)", "/pic/Shop/Other/Strap.png", "Peak Design", "Strap", 328, "Sling, 1.5m, 200g"],
+    [46, "Godox V1 Flash", "/pic/Shop/Other/Flash.png", "Godox", "Flash", 797, "Li-Ion, 76Ws, 1.5s Recycle Time"]
 ];
 var toggleNav = true;
 var toggleCart = true;
@@ -600,24 +610,26 @@ function filterShop(form) {
                 break;
             
             case "other":
-                // TODO -> Add view for the "Other" items and replace XXX with urls for pictures and product id.
                 document.getElementById("placeholder").innerHTML = `
-                    <img src="/pic/Shop/Fuji/Lens/XXX" />
-                    <img src="/pic/Shop/Fuji/Lens/XXX" />
-                    <button class="top" id="showXXX">SHOW PRODUCT</button>
-                    <button class="top" id="showXXX">SHOW PRODUCT</button>
-                    <img src="/pic/Shop/Fuji/Lens/XXX" />
-                    <img src="/pic/Shop/Fuji/Lens/XXX" />
-                    <button class="top" id="showXXX";">SHOW PRODUCT</button>
-                    <button class="top" id="showXXX";">SHOW PRODUCT</button>
-                    <img src="/pic/Shop/Fuji/Lens/XXX" />
-                    <img src="/pic/Shop/Fuji/Lens/XXX" />
-                    <button class="top" id="showXXX";">SHOW PRODUCT</button>
-                    <button class="top" id="showXXX";">SHOW PRODUCT</button>
+                    <img src="/pic/Shop/Other/Tri1.png" />
+                    <img src="/pic/Shop/Other/Tri2.png" />
+                    <button class="top" id="show39">SHOW PRODUCT</button>
+                    <button class="top" id="show40">SHOW PRODUCT</button>
+                    <img src="/pic/Shop/Other/Mem1.png" />
+                    <img src="/pic/Shop/Other/Mem2.png" />
+                    <button class="top" id="show41";">SHOW PRODUCT</button>
+                    <button class="top" id="show42";">SHOW PRODUCT</button>
+                    <img src="/pic/Shop/Other/Bag.png" />
+                    <img src="/pic/Shop/Other/Filter.png" />
+                    <button class="top" id="show43";">SHOW PRODUCT</button>
+                    <button class="top" id="show44";">SHOW PRODUCT</button>
+                    <img src="/pic/Shop/Other/Strap.png" />
+                    <img src="/pic/Shop/Other/Flash.png" />
+                    <button class="top" id="show45";">SHOW PRODUCT</button>
+                    <button class="top" id="show46";">SHOW PRODUCT</button>
                 `;
                 
-                // TODO -> Replace XXX with range.
-                for (let i = XXX; i <= XXX; i++) {
+                for (let i = 39; i <= 46; i++) {
                     document.getElementById("show" + i).addEventListener("click", () => {
                         displayProduct(i);
                     });
@@ -724,7 +736,7 @@ function displayCart() {
         document.getElementById("cartFill").innerHTML = '';
 
         for (var i = 0; i < cart.length; i++) {
-            document.getElementById("cartFill").innerHTML += `${cart[i][0]} X ${cart[i][1]} ${cart[i][2]} ${cart[i][3]} ---- ${cart[i][4]}₪<br />`;
+            document.getElementById("cartFill").innerHTML += `${cart[i][0]} X ${cart[i][1]} ${cart[i][2]} ${cart[i][3]} ---- ${cart[i][4]}₪<br /><hr />`;
         }   
     }
 }
