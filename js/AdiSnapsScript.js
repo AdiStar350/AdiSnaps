@@ -94,6 +94,49 @@ class Product {
     }
 
     get getTotal() { return this.total; }
+
+    bulkUpdate(...updates) {
+        let err = "";
+
+        for (update in updates) {
+            switch (update) {
+                case "id":
+                    this.setID = prompt("Enter Id: ");
+                    break;
+                case "productName":
+                    this.setName = prompt("Enter Name: ");
+                    break;
+                case "picture":
+                    this.setPicture = prompt("Enter Picture Source: ");
+                    break;
+                case "brand":
+                    this.setBrand = prompt("Enter Brand: ");
+                    break;
+                case "type":
+                    this.setType = prompt("Enter Type: ");
+                    break;
+                case "price":
+                    this.setPrice = prompt("Enter Price: ");
+                    break;
+                case "quantity":
+                    this.setQuantity = prompt("Enter Quantity: ");
+                    break;
+                case "other":
+                    this.setOther = prompt("Enter Other : ");
+                    break;
+                case "total":
+                    this.setTotal = prompt("Enter Total: ");
+                    break;
+                default:
+                    err += "Error: Invalid Update Property -> " + update + "\n";
+                    break;
+            }
+        }
+        
+        if (err !== "") {
+            alert(err);
+        }
+    }
  
     toString() {
         return `
@@ -209,7 +252,6 @@ class User {
         this.more = more;
         this.error = "";
         this.passed = true;
-
     }
 
     set setFirstName(value) {
@@ -340,8 +382,7 @@ class Order extends User {
             this.error += "Please enter a valid future expiration date.\n";
             this.passed = false;
         }
-    }
-        
+    }    
 
     get getCardExp() { return this.cardExp; }
 
@@ -665,6 +706,7 @@ function navBar(toggleNav) {
     }
 }
 
+
 function compareArr(arr1, arr2) {
     if (arr1.length !== arr2.length) {
         return false;
@@ -678,6 +720,7 @@ function compareArr(arr1, arr2) {
     
     return true;
 }
+
 
 function cartBar(toggleCart) {
     const arr = sessionStorage.getItem('cart');
@@ -717,9 +760,9 @@ function login(form) {
 
 
 function displayProduct(id) {
-    for (var i = 0; i < warehouse.length; i++) {
-        if (warehouse[i][0] == id) {
-            var product = new Product(warehouse[i][0], warehouse[i][1], warehouse[i][2], warehouse[i][3], warehouse[i][4], warehouse[i][5], warehouse[i][6]);
+    for (let p of warehouse) {
+        if (p[0] == id) {
+            var product = new Product(p[0], p[1], p[2], p[3], p[4], p[5], p[6]);
             break;
         }
     }
@@ -728,8 +771,10 @@ function displayProduct(id) {
     product.init();
 }
 
+
 function displayCart() {
     const arr = sessionStorage.getItem('cart');
+    
     if (arr) {
         cart = JSON.parse(arr);
 
@@ -740,6 +785,7 @@ function displayCart() {
         }   
     }
 }
+
 
 function cleanCart() {
     const arr = sessionStorage.getItem('cart');
