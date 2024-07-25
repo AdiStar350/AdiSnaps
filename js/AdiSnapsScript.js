@@ -302,13 +302,15 @@ class User {
     get getReason() { return this.reason; }
 
     set setArea(value) {
-        if (/^[a-zA-Z]+$/.test(value)) {
+        if (/^[a-zA-Z'\s]+$/i.test(value)) {
             this.area = value;
         } else {
             this.passed = false;
             this.error += "Please choose or enter an area!\n";
         }
     }
+
+    get getArea() { return this.area; }
 
     set setMore(value) { this.more = value; }
 
@@ -321,7 +323,7 @@ class User {
             Reason: ${this.reason.checked.value}
             Area: ${this.area}
             More: ${this.more}
-            `;
+        `;
     }
 }
 
@@ -407,6 +409,7 @@ class Order extends User {
         `;
     }    
 }
+
 
 const warehouse = [
     [1, "ZV-1 mark II", "/pic/Shop/Sony/Cam/zv-1-II.png", "Sony", "Camera", 3969, "18-50mm Fixed Lens, 3840 x 2160 Video Resolution, 20.1MP, Mirrorless"],
